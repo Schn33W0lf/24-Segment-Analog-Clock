@@ -92,7 +92,7 @@ volatile int scoreRight = 0;
 volatile long timerValue = 0;
 volatile int timerRunning = 0;
 
-void setup () {// TODO@t2/L87
+void setup () {// TODO@L123/t2
 
 	// Initialize LED strip
 	FastLED.delay(3000);
@@ -120,7 +120,7 @@ void setup () {// TODO@t2/L87
 	}
 		
 	t1.every(1000 * 29, refreshDisplay);
-	t2.every(1000, refreshTimer); //TODO: if displaying seconds, value should be < 1s
+	t2.every(1000, refreshTimer); // TODO: if displaying seconds, value should be < 1s
 	refreshDisplay();
 }
 
@@ -163,12 +163,13 @@ void refreshDisplay() {// OK
 	}
 }
 
-void refreshTimer() {// TODO, DEBUG
+void refreshTimer() {// TODO@L172, DEBUG
 	if(mode == 4 && timerRunning == 1 && timerValue < 6000) {
 		timerValue++;
 		int m = timerValue / 60;
 		int s = timerValue % 60;
-		/*DEBUG*/Serial.println("timer: " + m + ":" + s);
+		/* DEBUG */Serial.println("timer: " + m + ":" + s);
+		// TODO: display timer on 7s led module
 	}
 }
 
@@ -221,7 +222,7 @@ void processCommand(){// TODO
 		timerRunning = 0;
 		mode = 4;
 	} else if (btBuffer.startsWith("CHANGINGPATTERN")) {//opt 3 -> rainbow animations
-		//colorMODE = 2;*/
+		//colorMODE = 2;
 	}
 	
 	refreshDisplay();
@@ -329,7 +330,7 @@ void displayAnalogClock() {// OK
 	FastLED.show();
 }
 
-void displayTemperature() {// TODO@L302, DEBUG
+void displayTemperature() {// TODO@L339, DEBUG
 	float tmp = dht.readTemperature(settings_temperature_mode == 'F' ? true : false);
 	if (isnan(tmp)) {
 		Serial.println("Failed to read from DHT sensor!");
@@ -339,7 +340,7 @@ void displayTemperature() {// TODO@L302, DEBUG
 	}
 }
 
-void displayHumidity() {// TODO@L312, DEBUG
+void displayHumidity() {// TODO@L349, DEBUG
 	float hum = dht.readHumidity();
 	if (isnan(hum)) {
 		Serial.println("Failed to read from DHT sensor!");
@@ -349,7 +350,7 @@ void displayHumidity() {// TODO@L312, DEBUG
 	}
 }
 
-void displayScoreboard() {// TODO@L321, DEBUG
+void displayScoreboard() {// TODO@L359, DEBUG
 	fill_solid(&(LEDs[0]), NUM_LEDS, CRGB::Black);
 	fill_solid(&(LEDs[1]), 5, settings_color_score_right);
 	fill_solid(&(LEDs[7]), 5, settings_color_score_left);
@@ -358,7 +359,7 @@ void displayScoreboard() {// TODO@L321, DEBUG
 	// TODO: display score on 7s led module
 }
 
-void displayDots(int dotMode) {
+/*void displayDots(int dotMode) {// KEEP for 7s module?
 	// dotMode: 0=Both on, 1=Both Off, 2=Bottom On, 3=Blink
 	switch (dotMode) {
 		case 0:
@@ -381,10 +382,17 @@ void displayDots(int dotMode) {
 		default:
 			break;
 	}
-}
+}*/
 
-/*void displaySegments(int startindex, int number) {// KEEP, for 7s led modul?
-
+/*void displaySegments(int startindex, int number) {// KEEP, for 7s led module?
+	
+	/*
+	 * note for 7s module:
+	 * int m = 12;
+	 * int m0 = m / 10; // 1st digit (minutes, seconds)
+	 * int m1 = m % 10; // 2nd digit (minutes, seconds)
+	 * /
+	
 	byte numbers[] = {
 		0b00111111, // 0
 		0b00000110, // 1
@@ -402,7 +410,7 @@ void displayDots(int dotMode) {
 		0b00000000, // Empty		13
 		0b01110001, // F(ahrenheit)	14
 	};
-
+	
 	for (int i = 0; i < 7; i++) {
 		LEDs[i + startindex] = ((numbers[number] & 1 << i) == 1 << i) ? (colorMODE == 0 ? colorCRGB : colorCHSV) : colorOFF;
 	}
