@@ -1,7 +1,7 @@
 /*
  * MIT License
  * 
- * Copyright (c) 2019 Schn33W0lf
+ * Copyright (c) 2018 Leon van den Beukel, 2019 Schn33W0lf
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -53,15 +53,15 @@ DHT dht(DHTPIN, DHTTYPE);
  * - https://github.com/FastLED/FastLED/wiki/Pixel-reference#setting-hsv-colors-
  * - https://github.com/FastLED/FastLED/wiki/Pixel-reference#dimming-and-brightening-colors
  */
-/* brightness for xx:x0, xx:x5 [256ths] */#define settings_brightness_offset0 256.0f //100%
-/* brightness for xx:x1, xx:x4 [256ths] */#define settings_brightness_offset1 51.2f //20%
-/* brightness for xx:x2, xx:	 [256ths] */#define settings_brightness_offset2 102.4f //40%
-/* brightness for background	 [256ths] */#define settings_brightness_background 2.56f //1%
-/* color for background lighting				*/#define settings_color_background CRGB::DarkGoldenrod //or Goldenrod?
-/* color for hour pointer							 */#define settings_color_pointer_h CRGB::Red
-/* color for minutes pointer						*/#define settings_color_pointer_m CRGB::Blue
-/* enable background lighting					 */#define settings_enable_background 1 //0 = off (default), 1 = (0, 3, 6, 9 on), 2 = all on
-/* temperature mode (°C,°F)						 */#define settings_temperature_mode 'C'
+/* brightness for xx:x0, xx:x5 [256ths]		*/#define settings_brightness_offset0 256.0f //100%
+/* brightness for xx:x1, xx:x4 [256ths]		*/#define settings_brightness_offset1 51.2f //20%
+/* brightness for xx:x2, xx:	 [256ths]	*/#define settings_brightness_offset2 102.4f //40%
+/* brightness for background	 [256ths]	*/#define settings_brightness_background 2.56f //1%
+/* color for background lighting			*/#define settings_color_background CRGB::DarkGoldenrod //or Goldenrod?
+/* color for hour pointer					*/#define settings_color_pointer_h CRGB::Red
+/* color for minutes pointer				*/#define settings_color_pointer_m CRGB::Blue
+/* enable background lighting				*/#define settings_enable_background 1 //0 = off (default), 1 = (0, 3, 6, 9 on), 2 = all on
+/* temperature mode (°C,°F)					*/#define settings_temperature_mode 'C'
 /* led strip chip: (NOT a string!)			*/#define settings_led_chip WS2812B
 /* led strip type: (" RGB, GRB, ...)		*/#define settings_led_type GRB
 /* -------- */
@@ -423,4 +423,3 @@ String getValue(String data, char separator, int index) {// OK, get values from 
 
 	return found>index ? data.substring(strIndex[0], strIndex[1]) : "";
 }
-
