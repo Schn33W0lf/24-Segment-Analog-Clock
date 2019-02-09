@@ -1,7 +1,6 @@
 # 24-Segment-Analog-Clock
 
-Inspiration: [7-Segment-Digital-Clock](https://github.com/leonvandenbeukel/7-Segment-Digital-Clock)
-
+Inspiration: [7-Segment-Digital-Clock](https://github.com/leonvandenbeukel/7-Segment-Digital-Clock)<br>
 Original: [3D-7-Segment-Digital-Clock](https://github.com/leonvandenbeukel/3D-7-Segment-Digital-Clock)
 
 This is the source and schema for a homemade analog clock I've made. Here's a link to the [YouTube video](https://www.youtube.com/watch?v=1aNHF5tcTpw) of the digital clock by Leon van den Beukel, __not me__
