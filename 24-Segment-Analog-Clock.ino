@@ -28,10 +28,10 @@
  * 
  * External libraries you need:
  * Adafruit Sensor Library:	https://github.com/adafruit/Adafruit_Sensor
- * Adafruit DHT:			https://github.com/adafruit/DHT-sensor-library
- * Adafruit RTCLib:			https://github.com/adafruit/RTClib
- * FastLED:					https://github.com/FastLED/FastLED
- * Timer Library:			https://github.com/JChristensen/Timer
+ * Adafruit DHT:		https://github.com/adafruit/DHT-sensor-library
+ * Adafruit RTCLib:		https://github.com/adafruit/RTClib
+ * FastLED:			https://github.com/FastLED/FastLED
+ * Timer Library:		https://github.com/JChristensen/Timer
  */
 
 #include <DHT.h>
@@ -57,12 +57,12 @@ DHT dht(DHTPIN, DHTTYPE);
 /* brightness for xx:x1, xx:x4 [256ths]		*/#define settings_brightness_offset1 51.2f //20%
 /* brightness for xx:x2, xx:	 [256ths]	*/#define settings_brightness_offset2 102.4f //40%
 /* brightness for background	 [256ths]	*/#define settings_brightness_background 2.56f //1%
-/* color for background lighting			*/#define settings_color_background CRGB::DarkGoldenrod //or Goldenrod?
-/* color for hour pointer					*/#define settings_color_pointer_h CRGB::Red
-/* color for minutes pointer				*/#define settings_color_pointer_m CRGB::Blue
-/* enable background lighting				*/#define settings_enable_background 1 //0 = off (default), 1 = (0, 3, 6, 9 on), 2 = all on
-/* temperature mode (°C,°F)					*/#define settings_temperature_mode 'C'
-/* led strip chip: (NOT a string!)			*/#define settings_led_chip WS2812B
+/* color for background lighting		*/#define settings_color_background CRGB::DarkGoldenrod //or Goldenrod?
+/* color for hour pointer			*/#define settings_color_pointer_h CRGB::Red
+/* color for minutes pointer			*/#define settings_color_pointer_m CRGB::Blue
+/* enable background lighting			*/#define settings_enable_background 1 //0 = off (default), 1 = (0, 3, 6, 9 on), 2 = all on
+/* temperature mode (°C,°F)			*/#define settings_temperature_mode 'C'
+/* led strip chip: (NOT a string!)		*/#define settings_led_chip WS2812B
 /* led strip type: (" RGB, GRB, ...)		*/#define settings_led_type GRB
 /* -------- */
 
@@ -81,12 +81,12 @@ Timer t2;
 
 String btBuffer;
 /*
-CRGB colorCRGB = CRGB::Red;				// Change this if you want another default color, for example CRGB::Blue
+CRGB colorCRGB = CRGB::Red;		// Change this if you want another default color, for example CRGB::Blue
 CHSV colorCHSV = CHSV(95, 255, 255);	// Green
-CRGB colorOFF	= CRGB(20,20,20);		// Color of the segments that are 'disabled'. You can also set it to CRGB::Black
-volatile int colorMODE = 1;				// 0=CRGB, 1=CHSV, 2=Constant Color Changing pattern
+CRGB colorOFF	= CRGB(20,20,20);	// Color of the segments that are 'disabled'. You can also set it to CRGB::Black
+volatile int colorMODE = 1;		// 0=CRGB, 1=CHSV, 2=Constant Color Changing pattern
 */
-volatile int mode = 0;					// 0=Clock, 1=Temperature, 2=Humidity, 3=Scoreboard, 4=Time counter ///TODO: Need Fix
+volatile int mode = 0;			// 0=Clock, 1=Temperature, 2=Humidity, 3=Scoreboard, 4=Time counter ///TODO: Need Fix
 volatile int scoreLeft = 0;
 volatile int scoreRight = 0;
 volatile long timerValue = 0;
