@@ -6,7 +6,7 @@ __Note:__ Still work in progress, v0: display time, set time with smartphone.
 This is the source and schema for a homemade analog clock I've made. The code is based on [this](https://github.com/leonvandenbeukel/3D-7-Segment-Digital-Clock/blob/master/3D-7-Segment-Digital-Clock.ino).
 
 In daylight it's not very bright.
-You can download the Android app from the Play Story here: https://play.google.com/store/apps/details?id=nl.leonvandenbeukel.BTDigitalClockApp (__not my app__, but working on one.)
+You can download the Android app from the [Play Story](https://play.google.com/store/apps/details?id=nl.leonvandenbeukel.BTDigitalClockApp) (__not my app__, but working on one.)
 
 
 ![alt text](https://github.com/Schn33W0lf/24-Segment-Analog-Clock/blob/master/Schema.png)
@@ -19,7 +19,7 @@ You can download the Android app from the Play Story here: https://play.google.c
 | Bluetooth module: HC-05                 			  |                                        | Library: [FastLED](https://github.com/FastLED/FastLED)                  |
 | Temperature and Humidity Sensor: DHT11 or DHT22 |                                        | Library: [RTCLib](https://github.com/adafruit/RTClib)                   |
 | LED 4 Digits 7 Segment Display: TM1637          |                                        | Library: [Timer](https://github.com/JChristensen/Timer)                 |
-| 5V / 2A  Power Supply								            |                                        | ? Library: [TM1637](#)                                                  |
+| 5V / 2A  Power Supply								            |                                        | Library: [TM1637](#) ?                                                  |
 | PCB                                    			    |                                        |                                                                         |
 | Wires, Glue and a lot of patience :)       	    |                                        |                                                                         |
 
