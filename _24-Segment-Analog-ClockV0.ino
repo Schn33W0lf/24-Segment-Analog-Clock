@@ -60,6 +60,8 @@ DHT dht(DHTPIN, DHTTYPE);
 /* color for background lighting		*/#define settings_color_background CRGB::DarkGoldenrod //or Goldenrod?
 /* color for hour pointer			*/#define settings_color_pointer_h CRGB::Red
 /* color for minutes pointer			*/#define settings_color_pointer_m CRGB::Blue
+/* color for left  score (half circle)		*/#define settings_color_score_left CRGB::Blue
+/* color for right score (half circle)		*/#define settings_color_score_right CRGB::Red
 /* enable background lighting			*/#define settings_enable_background 1 //0 = off (default), 1 = (0, 3, 6, 9 on), 2 = all on
 /* temperature mode (°C,°F)			*/#define settings_temperature_mode 'C'
 /* led strip chip: (NOT a string!)		*/#define settings_led_chip WS2812B
@@ -128,7 +130,6 @@ void loop () {// OK
 	
 	t1.update();
 	t2.update();
-	t3.update();
 
 	if (BTserial.available())
 	{
@@ -168,7 +169,7 @@ void refreshTimer() {// TODO@L172, DEBUG
 		timerValue++;
 		int m = timerValue / 60;
 		int s = timerValue % 60;
-		/* DEBUG */Serial.println("timer: " + m + ":" + s);
+		/* DEBUG */Serial.println(String("timer: ") + String(m) + String(":") + String(s));
 		// TODO: display timer on 7s led module
 	}
 }
@@ -335,7 +336,9 @@ void displayTemperature() {// TODO@L339, DEBUG
 	if (isnan(tmp)) {
 		Serial.println("Failed to read from DHT sensor!");
 	} else {
-		/* DEBUG */Serial.println("temp: " + tmp + "°" + settings_temperature_mode);
+		/* DEBUG */Serial.print("temp: ");
+			Serial.print(tmp);
+			Serial.println("°" + settings_temperature_mode);
 		// TODO: display temp on 7s led module
 	}
 }
@@ -345,7 +348,9 @@ void displayHumidity() {// TODO@L349, DEBUG
 	if (isnan(hum)) {
 		Serial.println("Failed to read from DHT sensor!");
 	} else {
-		/* DEBUG */Serial.println("humidity: " + tmp + "%");
+		/* DEBUG */Serial.print("humidity: ");
+			Serial.print(hum);
+			Serial.println("%");
 		// TODO: display hum on 7s led module
 	}
 }
@@ -355,7 +360,7 @@ void displayScoreboard() {// TODO@L359, DEBUG
 	fill_solid(&(LEDs[1]), 5, settings_color_score_right);
 	fill_solid(&(LEDs[7]), 5, settings_color_score_left);
 	FastLED.show();
-	/* DEBUG */Serial.println("Score R: " + scoreRight + "\n" + "Score R: " + scoreLeft);
+	/* DEBUG */Serial.println(String("Score R: ") + String(scoreRight) + String("\nScore R: ") + String(scoreLeft));
 	// TODO: display score on 7s led module
 }
 
