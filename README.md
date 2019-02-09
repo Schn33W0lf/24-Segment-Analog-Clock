@@ -1,12 +1,10 @@
 # 24-Segment-Analog-Clock
+___7-Segment-Digital-Clock\_Analog-Patch___
 
-Inspiration: [7-Segment-Digital-Clock](https://github.com/leonvandenbeukel/7-Segment-Digital-Clock)<br>
-Original: [3D-7-Segment-Digital-Clock](https://github.com/leonvandenbeukel/3D-7-Segment-Digital-Clock)
-
-This is the source and schema for a homemade analog clock I've made. Here's a link to the [YouTube video](https://www.youtube.com/watch?v=1aNHF5tcTpw) of the digital clock by Leon van den Beukel, __not me__
+This is the source and schema for a homemade analog clock I've made. The code is based on [this](https://github.com/leonvandenbeukel/3D-7-Segment-Digital-Clock/3D-7-Segment-Digital-Clock.ino).
 
 In daylight it's not very bright.
-You can download the Android app from the Play Story here: https://play.google.com/store/apps/details?id=nl.leonvandenbeukel.BTDigitalClockApp (Also __not my app!__)
+You can download the Android app from the Play Story here: https://play.google.com/store/apps/details?id=nl.leonvandenbeukel.BTDigitalClockApp (__not my app__, but working on one.)
 
 
 ![alt text](https://github.com/Schn33W0lf/24-Segment-Analog-Clock/blob/master/Schema.png)
