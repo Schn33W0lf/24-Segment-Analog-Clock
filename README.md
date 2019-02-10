@@ -19,7 +19,7 @@ You can download the Android app from the [Play Story](https://play.google.com/s
 | Bluetooth module: HC-05                 			  |                                        | Library: [FastLED](https://github.com/FastLED/FastLED)                  |
 | Temperature and Humidity Sensor: DHT11 or DHT22 |                                        | Library: [RTCLib](https://github.com/adafruit/RTClib)                   |
 | LED 4 Digits 7 Segment Display: TM1637          |                                        | Library: [Timer](https://github.com/JChristensen/Timer)                 |
-| 5V / 2A  Power Supply								            |                                        | Library: [TM1637](#) ?                                                  |
+| 5V / 2A  Power Supply								            |                                        | Library: [TM1637](https://github.com/avishorp/TM1637)                   |
 | PCB                                    			    |                                        |                                                                         |
 | Wires, Glue and a lot of patience :)       	    |                                        |                                                                         |
 
