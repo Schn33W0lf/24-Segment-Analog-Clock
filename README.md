@@ -24,8 +24,8 @@ To control the clock you can use a bluetooth terminal of your choice (I'm workin
 | PCB                                    			    |                                        |                                                                         |
 | Wires, Glue and a lot of patience :)       	    |                                        |                                                                         |
 
-[Clock displaying scoreboard](https://github.com/Schn33W0lf/24-Segment-Analog-Clock/blob/master/IMG_20190223_185226.jpg)<br>
-[Clock displaying 18:55](https://github.com/Schn33W0lf/24-Segment-Analog-Clock/blob/master/IMG_20190223_185608.jpg)
+[Clock displaying scoreboard](https://github.com/Schn33W0lf/24-Segment-Analog-Clock/blob/master/clock_dev_scoreboard.png)<br>
+[Clock displaying 18:55](https://github.com/Schn33W0lf/24-Segment-Analog-Clock/blob/master/clock_dev_time.png)
 ## Commands
 
 To send a command to the clock, you need to wrap it into this characters: ||
