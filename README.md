@@ -6,7 +6,7 @@ __Note:__ Still work in progress, v0: display time, scoreboard (only red/ blue s
 This is the source and schema for a homemade analog clock I've made. The code is based on [this](https://github.com/leonvandenbeukel/3D-7-Segment-Digital-Clock/blob/master/3D-7-Segment-Digital-Clock.ino).
 
 In daylight it's not very bright.
-To control the clock you can use a bluetooth terminal of your choice.
+To control the clock you can use a bluetooth terminal of your choice (I'm working on an app).
 
 ## Hardware
 
