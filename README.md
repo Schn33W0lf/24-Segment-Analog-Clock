@@ -1,13 +1,14 @@
 # 24-Segment-Analog-Clock
 ___7-Segment-Digital-Clock\_Analog-Patch___
 
-__Note:__ Still work in progress, v0: display time, set time with smartphone.
+__Note:__ Still work in progress, v0: display time, scoreboard (only red/ blue sides). TODO: implement 7s display
 
 This is the source and schema for a homemade analog clock I've made. The code is based on [this](https://github.com/leonvandenbeukel/3D-7-Segment-Digital-Clock/blob/master/3D-7-Segment-Digital-Clock.ino).
 
 In daylight it's not very bright.
-You can download the Android app from the [Play Story](https://play.google.com/store/apps/details?id=nl.leonvandenbeukel.BTDigitalClockApp) (__not my app__, but working on one.)
+To control the clock you can use a bluetooth terminal of your choice.
 
+## Hardware
 
 ![alt text](https://github.com/Schn33W0lf/24-Segment-Analog-Clock/blob/master/Schema.png)
 
@@ -23,3 +24,42 @@ You can download the Android app from the [Play Story](https://play.google.com/s
 | PCB                                    			    |                                        |                                                                         |
 | Wires, Glue and a lot of patience :)       	    |                                        |                                                                         |
 
+## Commands
+
+To send a command to the clock, you need to wrap it into this characters: ||
+
+Synthax:
+
+`| Command,arg0,argN|` 
+
+| Command     | Arguments        | Description |
+| ---         | ---              | ---         |
+| RESET       | none             | Restarts the Arduino (like pushing the reset button or put the reset pin high) |
+| CLOCK       | none             | Set mode to 0 (Display time) |
+| TEMPERATURE | none             | Set mode to 1 (Display time and temperature)* |
+| HUMIDITY    | none             | Set mode to 2 (Display time and humidity)* |
+| SCOREBOARD  | L, R             | Set mode to 3 and Set score of L and R (both type integer, 0 ≤ n ≤ 99) |
+| TIMER       | none             | Set mode to 4 and start/ stop timer (Returns `\|TIMER,(timerRunning as int)\|`) |
+| MODETOGGLE  | none             | Define, if the clock toggles every 5 seconds between mode 1 and 2 (Returns `\|MODETOGGLE,(modeToggle as int)\|`) |
+| RTC         | Y, M, D, h, m, s | Set time. No leading zeros required (Year, Month, Day, Hour, Minute, Second) |
+| COLOR       | target, r, g, b  | Set rgb color of target (B, H, M, L, R)** |
+| BRIGHTNESS  | target, value    | Set brightness of target(B, H, 0, 1, 2, L)***  |
+
+\*If modeToggle is true, the clock toggles between temperature and humidity.<br>
+\*\*List of color targets:
+ - B: Background
+ - H: Hour dot (pointer)
+ - M: Minute dot(s) (pointer)
+ - L: Score left
+ - R: Score right
+
+\*\*\*List of brightness targets:
+ - B: Background
+ - H: Hour dot (pointer)
+ - 0: Minutes dot (offset 0)
+ - 1: Minutes dot (offset 1)
+ - 2: Minutes dot (offset 2)
+ - L: Set background lighting:
+   - 0: Off
+   - 1: Quarters
+   - 2: All
