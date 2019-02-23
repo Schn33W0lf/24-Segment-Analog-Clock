@@ -16,7 +16,7 @@ To control the clock you can use a bluetooth terminal of your choice (I'm workin
 | -------------                          	        | -------------                          | -------------                                                           |
 | Arduino Nano                           			    | Li-Ion 18650 Battery                   | Arduino IDE                                                             |
 | LED strip WS2812B 1 meter 30 RGB LED's		 	    | 5V 1A Step Up Power Module             | Library: [Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor) |
-| Real time clock: DS3231 and battery          		| A battery holder wouldn't be bad...    | Library: [DHT](https://github.com/adafruit/DHT-sensor-library)          |
+| Real time clock: DS3231 and battery (and a battery for it if not included)          		| A battery holder wouldn't be bad...    | Library: [DHT](https://github.com/adafruit/DHT-sensor-library)          |
 | Bluetooth module: HC-05                 			  |                                        | Library: [FastLED](https://github.com/FastLED/FastLED)                  |
 | Temperature and Humidity Sensor: DHT11 or DHT22 |                                        | Library: [RTCLib](https://github.com/adafruit/RTClib)                   |
 | LED 4 Digits 7 Segment Display: TM1637          |                                        | Library: [Timer](https://github.com/JChristensen/Timer)                 |
@@ -24,6 +24,8 @@ To control the clock you can use a bluetooth terminal of your choice (I'm workin
 | PCB                                    			    |                                        |                                                                         |
 | Wires, Glue and a lot of patience :)       	    |                                        |                                                                         |
 
+[Clock displaying scoreboard](https://github.com/Schn33W0lf/24-Segment-Analog-Clock/blob/master/IMG_20190223_185226.jpg)<br>
+[Clock displaying 18:55](https://github.com/Schn33W0lf/24-Segment-Analog-Clock/blob/master/IMG_20190223_185608.jpg)
 ## Commands
 
 To send a command to the clock, you need to wrap it into this characters: ||
