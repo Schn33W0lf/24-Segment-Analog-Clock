@@ -35,7 +35,13 @@
  */
 
 /*
- * TODO: Implement 7s display in some functions
+ * TODO: Implement 7s display in some functions for
+ * - date
+ * - temperature
+ * - humidity
+ * - scoreboard
+ * - timer
+ * TODO: Timer: show milliseconds with cricles?
  *
  * INFO: Because of performance problems, I commented most [D]ebug messages out.
  * INFO: For Debugging:
@@ -201,6 +207,9 @@ void processBtBuffer() {
 		Serial.println("[I] Restarting Arduino...");
 		delay(1000);
 		resetFunc();
+	} else if (btBuffer == "PING") {
+		BTserial.print("|PONG,3|");
+		// [D] Serial.println("[D] Received PING, Sending PONG with VERSION 3");
 	} else if (btBuffer == "CLOCK") {
 		mode = 0;
 		// [D] Serial.println("[D] Switched mode to 0");
