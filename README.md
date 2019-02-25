@@ -34,6 +34,7 @@ Synthax:
 
 | Command     | Arguments        | Description |
 | ---         | ---              | ---         |
+| PING        | none             | Returns `\|PONG,(version)\|`. Its for the app (to check if right device, for different versions, ...) |
 | RESET       | none             | Restarts the Arduino (like pushing the reset button or put the reset pin high) |
 | CLOCK       | none             | Set mode to 0 (Display time) |
 | TEMPERATURE | none             | Set mode to 1 (Display time and temperature)* |
