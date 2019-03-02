@@ -46,7 +46,7 @@ Synthax:
 | COLOR       | target, r, g, b  | Set rgb color of target (B, P, S)\*\*\* |
 | BRIGHTNESS  | target, value    | Set brightness of target(B, H, 0, 1, 2, L)*\*\*\*  |
 
-\*For parameters see [AnalogClockV4 » processBtBuffer() » if PING \[#L218\]](https://github.com/Schn33W0lf/24-Segment-Analog-Clock/blob/master/AnalogClockV4.ino#L218)
+\*For parameters see [AnalogClockV4 » processBtBuffer() » if PING \[#L218\]](AnalogClockV4.ino#L218)
  
 \*\*If modeToggle is true, the clock toggles between temperature and humidity.<br>
 \*\*\*List of color targets:
