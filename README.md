@@ -34,25 +34,27 @@ Synthax:
 
 | Command     | Arguments        | Description |
 | ---         | ---              | ---         |
-| PING        | none             | Returns `\|PONG,(version)\|`. Its for the app (to check if right device, for different versions, ...) |
+| PING        | none             | Returns `\|STATUS,(some parameters\*)\|`. Its for the app (to check if right device, for different versions, ...) |
 | RESET       | none             | Restarts the Arduino (like pushing the reset button or put the reset pin high) |
 | CLOCK       | none             | Set mode to 0 (Display time) |
-| TEMPERATURE | none             | Set mode to 1 (Display time and temperature)* |
-| HUMIDITY    | none             | Set mode to 2 (Display time and humidity)* |
+| TEMPERATURE | none             | Set mode to 1 (Display time and temperature)\*\* |
+| HUMIDITY    | none             | Set mode to 2 (Display time and humidity)\*\* |
 | SCOREBOARD  | L, R             | Set mode to 3 and Set score of L and R (both type integer, 0 ≤ n ≤ 99) |
 | TIMER       | none             | Set mode to 4 and start/ stop timer (Returns `\|TIMER,(timerRunning as int)\|`) |
 | MODETOGGLE  | none             | Define, if the clock toggles every 5 seconds between mode 1 and 2 (Returns `\|MODETOGGLE,(modeToggle as int)\|`) |
 | RTC         | Y, M, D, h, m, s | Set time. No leading zeros required (Year, Month, Day, Hour, Minute, Second) |
-| COLOR       | target, r, g, b  | Set rgb color of target (B, P, S)** |
-| BRIGHTNESS  | target, value    | Set brightness of target(B, H, 0, 1, 2, L)***  |
+| COLOR       | target, r, g, b  | Set rgb color of target (B, P, S)\*\*\* |
+| BRIGHTNESS  | target, value    | Set brightness of target(B, H, 0, 1, 2, L)*\*\*\*  |
 
-\*If modeToggle is true, the clock toggles between temperature and humidity.<br>
-\*\*List of color targets:
+\*For parameters see [AnalogClockV4 » processBtBuffer() » if PING \[#L218\]](https://github.com/Schn33W0lf/24-Segment-Analog-Clock/blob/master/AnalogClockV4.ino#L218)
+ 
+\*\*If modeToggle is true, the clock toggles between temperature and humidity.<br>
+\*\*\*List of color targets:
  - B: Background
  - P: Hour dot (pointer) &  Score left
  - S: Minute dot(s) (pointer) & Score right
 
-\*\*\*List of brightness targets:
+\*\*\*\*List of brightness targets:
  - B: Background
  - H: Hour dot (pointer)
  - 0: Minutes dot (offset 0)
