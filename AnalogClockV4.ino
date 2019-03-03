@@ -75,7 +75,6 @@ DHT dht(DHTPIN, DHTTYPE);
 #define settings_led_chip WS2812B
 #define settings_led_type GRB
 CRGB LEDs[NUM_LEDS];
-#define FRAMES_PER_SECOND 60
 
 // Setup Bluetooth
 /// BTserial(RXD, TXD);
@@ -103,7 +102,7 @@ volatile int scoreRight;
 
 // Setup for Clock
 volatile short mode = 0;
-volatile bool modeToggle = false;
+volatile bool modeToggle = true;
 const int toggleInterval = 5;
 
 char temperatureMode = 'C';
@@ -112,7 +111,6 @@ CRGB colorBackground = CRGB::DarkGoldenrod;
 CRGB colorPrimary = CRGB::Blue;
 CRGB colorSecondary = CRGB::Red;
 float brightnessBackground = 2.56f; /// 1%
-float brightnessPointerHours = 255.0f; /// 100%
 /**
  * Info for offset:
  * offset 0 means that the minute mod 5 is 0 (minutes: 0, 5, 10, 15, 20, ... 55)
@@ -122,9 +120,9 @@ float brightnessPointerHours = 255.0f; /// 100%
  *                           o1, that it is 5 past[before] BUT it is more near to 10 past[before] by 1 minute
  *                           o2, that it is 5 past[before] BUT it is more near to 10 past[before] by 2 minutes
  */
-float brightnessPointerMins0 = 255.0f; /// 100%
-float brightnessPointerMins1 = 51.2f; /// 10%
-float brightnessPointerMins2 = 102.4f; /// 20%
+float brightnessOffset0 = 255.0f; /// 100%
+float brightnessOffset1 = 51.2f; /// 10%
+float brightnessOffset2 = 102.4f; /// 20%
 bool backgroundLighting = false; /// false = quarters, true = all
 
 // Setup
@@ -246,13 +244,11 @@ void processBtBuffer() {
 		BTserial.print(',');
 		BTserial.print((int)brightnessBackground);
 		BTserial.print(',');
-		BTserial.print((int)brightnessPointerHours);
+		BTserial.print((int)brightnessOffset0);
 		BTserial.print(',');
-		BTserial.print((int)brightnessPointerMins0);
+		BTserial.print((int)brightnessOffset1);
 		BTserial.print(',');
-		BTserial.print((int)brightnessPointerMins1);
-		BTserial.print(',');
-		BTserial.print((int)brightnessPointerMins2);
+		BTserial.print((int)brightnessOffset2);
 		BTserial.print(',');
 		BTserial.print((backgroundLighting ? 1 : 0));
 		BTserial.print('|');
@@ -281,9 +277,6 @@ void processBtBuffer() {
 		Serial.print("[D] Switched mode to 4, ");
 		Serial.print(v);
 		Serial.println(" timer");*/
-		BTserial.print("|TIMER,");
-		BTserial.print(timerRunning);
-		BTserial.print("|");
 	} else if (btBuffer == "MODETOGGLE") {
 		modeToggle = !modeToggle;
 		/* [D]
@@ -291,9 +284,6 @@ void processBtBuffer() {
 		Serial.print("[D] Toggle Temp/ Hum is ");
 		Serial.print(v);
 		Serial.println(" now");*/
-		BTserial.print("|MODETOGGLE,");
-		BTserial.print(modeToggle);
-		BTserial.print("|");
 	} else if (btBuffer.startsWith("RTC")) {
 		long y = getValue(btBuffer, ',', 1).toInt();
 		long m = getValue(btBuffer, ',', 2).toInt();
@@ -334,17 +324,14 @@ void processBtBuffer() {
 			case 'B':
 				brightnessBackground = (float)value;
 				break;
-			case 'H':
-				brightnessPointerHours = (float)value;
-				break;
 			case '0':
-				brightnessPointerMins0 = (float)value;
+				brightnessOffset0 = (float)value;
 				break;
 			case '1':
-				brightnessPointerMins1 = (float)value;
+				brightnessOffset1 = (float)value;
 				break;
 			case '2':
-				brightnessPointerMins2 = (float)value;
+				brightnessOffset2 = (float)value;
 				break;
 			case 'L':
 				backgroundLighting = (value == 1);
@@ -441,68 +428,67 @@ void displayAnalogClock() {
 	}
 	/// Set leds - hours
 	LEDs[hours] = colorPrimary;
-	LEDs[hours].nscale8_video(brightnessPointerHours);
+	LEDs[hours].nscale8_video(brightnessOffset0);
 	/// Set leds - mins
 	if(offset == 0) {
 		/// If minutes are 5; 10; 15; ... 55: only this led on
 		LEDs[mins] = colorSecondary;
-		LEDs[mins].nscale8_video(brightnessPointerMins0);
+		LEDs[mins].nscale8_video(brightnessOffset0);
 	} else {
 		/// If minutes are 1; 2; 3; 4; 6; ... 59: 2 leds on
 		switch(offset) {
 			case 1:
 				if(mins < 11) {
 					fill_solid(&(LEDs[mins]), 2, colorSecondary);
-					LEDs[mins].nscale8_video(brightnessPointerMins0);
-					LEDs[mins + 1].nscale8_video(brightnessPointerMins1);
+					LEDs[mins].nscale8_video(brightnessOffset0);
+					LEDs[mins + 1].nscale8_video(brightnessOffset1);
 				} else {
 					LEDs[11] = colorSecondary;
 					LEDs[0] = colorSecondary;
-					LEDs[11].nscale8_video(brightnessPointerMins0);
-					LEDs[0].nscale8_video(brightnessPointerMins1);
+					LEDs[11].nscale8_video(brightnessOffset0);
+					LEDs[0].nscale8_video(brightnessOffset1);
 				}
 				break;
 			case 2:
 				if(mins < 11) {
 					fill_solid(&(LEDs[mins]), 2, colorSecondary);
-					LEDs[mins].nscale8_video(brightnessPointerMins0);
-					LEDs[mins + 1].nscale8_video(brightnessPointerMins2);
+					LEDs[mins].nscale8_video(brightnessOffset0);
+					LEDs[mins + 1].nscale8_video(brightnessOffset2);
 				}
 				else {
 					LEDs[11] = colorSecondary;
 					LEDs[0] = colorSecondary;
-					LEDs[11].nscale8_video(brightnessPointerMins0);
-					LEDs[0].nscale8_video(brightnessPointerMins2);
+					LEDs[11].nscale8_video(brightnessOffset0);
+					LEDs[0].nscale8_video(brightnessOffset2);
 				}
 				break;
 			case 3:
 				if(mins < 11) {
 					fill_solid(&(LEDs[mins]), 2, colorSecondary);
-					LEDs[mins + 1].nscale8_video(brightnessPointerMins0);
-					LEDs[mins].nscale8_video(brightnessPointerMins2);
+					LEDs[mins + 1].nscale8_video(brightnessOffset0);
+					LEDs[mins].nscale8_video(brightnessOffset2);
 				} else {
 					LEDs[11] = colorSecondary;
 					LEDs[0] = colorSecondary;
-					LEDs[0].nscale8_video(brightnessPointerMins0);
-					LEDs[11].nscale8_video(brightnessPointerMins2);
+					LEDs[0].nscale8_video(brightnessOffset0);
+					LEDs[11].nscale8_video(brightnessOffset2);
 				}
 				break;
 			case 4:
 				if(mins < 11) {
 					fill_solid(&(LEDs[mins]), 2, colorSecondary);
-					LEDs[mins + 1].nscale8_video(brightnessPointerMins0);
-					LEDs[mins].nscale8_video(brightnessPointerMins1);
+					LEDs[mins + 1].nscale8_video(brightnessOffset0);
+					LEDs[mins].nscale8_video(brightnessOffset1);
 				} else {
 					LEDs[11] = colorSecondary;
 					LEDs[0] = colorSecondary;
-					LEDs[0].nscale8_video(brightnessPointerMins0);
-					LEDs[11].nscale8_video(brightnessPointerMins1);
+					LEDs[0].nscale8_video(brightnessOffset0);
+					LEDs[11].nscale8_video(brightnessOffset1);
 				}
 				break;
 		}
 	}
 	FastLED.show();
-	FastLED.delay(1000 / FRAMES_PER_SECOND);
 }
 
 void displayTemperature() {// TODO implement 7s display
@@ -536,8 +522,10 @@ void displayScoreboard() {// TODO implement 7s display
 	fill_solid(&(LEDs[0]), NUM_LEDS, CRGB::Black);
 	fill_solid(&(LEDs[1]), 5, colorPrimary);
 	fill_solid(&(LEDs[7]), 5, colorSecondary);
+	for(int i = 0; i < NUM_LEDS; i++) {
+		LEDs[i].nscale8_video(brightnessOffset0);
+	}
 	FastLED.show();
-	FastLED.delay(1000 / FRAMES_PER_SECOND);
 	// DEBUG
 	//Serial.print("[D] Score Left: ");
 	//Serial.println(scoreLeft);
