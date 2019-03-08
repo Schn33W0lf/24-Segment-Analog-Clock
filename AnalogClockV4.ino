@@ -311,6 +311,7 @@ void processBtBuffer() {
 				colorPrimary.setRGB(r, g, b);
 				break;
 			case 'S':
+				colorSecondary.setRGB(r, g, b);
 				break;
 			/*default:
 				Serial.println("[E] Unknown target");
