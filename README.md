@@ -6,7 +6,26 @@ __Note:__ Still work in progress, v0: display time, scoreboard (only red/ blue s
 This is the source and schema for a homemade analog clock I've made. The code is based on [this](https://github.com/leonvandenbeukel/3D-7-Segment-Digital-Clock/blob/master/3D-7-Segment-Digital-Clock.ino).
 
 In daylight it's not very bright.
-To control the clock you can use a bluetooth terminal of your choice (I'm working on an app).
+To control the clock you can use a bluetooth terminal of your choice or my [app](analog-clock-v1-build1-release.apk).<br>
+
+## App
+
+Feel free to modify my app like you want to (for non-commercial purposes!).
+
+If the app asks you to enable bluetooth, the devices wont display after you allowed it, first you need to reload the current site.<br>
+Press on the Devices button to reload the site (works on other sites too).
+
+### App permissions:
+
+The App needs following permissions:
+
+ - &lt;uses-permission android:name="android.permission.BLUETOOTH" /&gt;
+ - &lt;uses-permission android:name="android.permission.BLUETOOTH_ADMIN" /&gt;
+ - &lt;uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /&gt;
+ - &lt;uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /&gt;
+
+Bluetooth should be logical. The app will ask befor enabling Bluetooth or access the storage. The storage is used to save some values (see site advanced). You can save and load color values.<br>
+The values will be stored in most cases to `/storage/emulated/0/AnalogClockV1/config.json`.
 
 ## Hardware
 
