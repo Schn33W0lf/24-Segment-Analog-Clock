@@ -25,7 +25,7 @@ The App needs following permissions:
  - &lt;uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /&gt;
 
 Bluetooth should be logical. The app will ask befor enabling Bluetooth or access the storage. The storage is used to save some values (see site advanced). You can save and load color values.<br>
-The values will be stored in most cases to `/storage/emulated/0/AnalogClockV1/config.json`.
+The values will be stored in most cases to `/storage/emulated/0/AnalogClockV1/config.json`, just open a file explorer and navigate to internal storage. anywhere there you should find the folder AnalogClockV1.
 
 ## Hardware
 
