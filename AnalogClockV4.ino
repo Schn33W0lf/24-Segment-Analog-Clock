@@ -1,7 +1,7 @@
 /*
  * MIT License
  * 
- * Copyright (c) 2018 Leon van den Beukel, 2019 Schn33W0lf
+ * Copyright (c) 2019 Schn33W0lf
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -62,6 +62,42 @@
 #include <SoftwareSerial.h>
 #include "Timer.h"
 #include <string.h>
+#include <TM1637Display.h>
+
+// Setup for TM1637
+/// Arduino(D2)----TM1637(CLK)
+/// Arduino(D3)----TM1637(DIO)
+TM1637Display display(2, 3);
+const byte numbersWithDot[] = {
+    0b10111111, // 0
+    0b10000110, // 1
+    0b11011011, // 2
+    0b11001111, // 3
+    0b11100110, // 4
+    0b11101101, // 5
+    0b11111101, // 6
+    0b10000111, // 7
+    0b11111111, // 8
+    0b11101111, // 9
+};
+const byte numbersWithoutDot[] = {
+    0b00111111, // 0
+    0b00000110, // 1
+    0b01011011, // 2
+    0b01001111, // 3
+    0b01100110, // 4
+    0b01101101, // 5
+    0b01111101, // 6
+    0b00000111, // 7
+    0b01111111, // 8
+    0b01101111, // 9
+};
+const byte extras[] = {
+    0b01100011, // º
+    0b00111001, // C(elcius)
+    0b01011100, // º lower
+    0b01110001, // F(ahrenheit)
+};
 
 // Setup DHT (Temp & Hum)
 #define DHTPIN 12
@@ -101,6 +137,8 @@ volatile int scoreLeft;
 volatile int scoreRight;
 
 // Setup for Clock
+short muxReturn[2];
+
 volatile short mode = 0;
 volatile bool modeToggle = true;
 const int toggleInterval = 5;
@@ -156,7 +194,11 @@ void setup () {
 		//Serial.println("[I] RTC lost power, Reset the time.");
 	}
 	
-	// Initialitze Timers
+	// Initialize TM1637 (clear)
+	display.clear();
+	display.setBrightness(0x0f);
+	
+	// Initialize Timers
 	t1.every(1000 * 29, refreshDisplay);
 	t2.every(1000, refreshTimer);
 	refreshDisplay();
@@ -188,6 +230,30 @@ void loop () {
 }
 
 // Utils
+/**
+ * multiplexer:
+ * xx   -> x x no dp
+ * xx.x -> x x dp
+ * 0x.x -> x x dp
+ **/
+void mux(float value, bool score) {
+	if (score) {
+		short tmp = (int)value;
+		muxReturn[0] = numbersWithoutDot[tmp];
+		muxReturn[1] = numbersWithDot[(int)((value - tmp) * 10)];
+	} else {
+		if (value < 10) {
+			//x.x°C
+			short tmp = (int)value;
+			muxReturn[0] = numbersWithDot[tmp];
+			muxReturn[1] = numbersWithoutDot[(int)((value - tmp) * 10)];
+		} else {
+			//xx°C
+			muxReturn[0] = numbersWithoutDot[(int)value / 10];
+			muxReturn[1] = numbersWithoutDot[(int)value % 10];
+		}
+	}
+}
 String getValue(String data, char separator, int index) {
 	int found = 0;
 	int strIndex[] = { 0, -1 };
@@ -370,16 +436,18 @@ void refreshDisplay() {
 }
 
 void refreshTimer() {// TODO implement 7s display
-	refresh++;
-	if(refresh >= toggleInterval) {
-		if (mode == 1) {
-			mode = 2;
-			refreshDisplay();
-		} else if (mode == 2) {
-			mode = 1;
-			refreshDisplay();
+	if (modeToggle) {
+		refresh++;
+		if(refresh >= toggleInterval) {
+			if (mode == 1) {
+				mode = 2;
+				refreshDisplay();
+			} else if (mode == 2) {
+				mode = 1;
+				refreshDisplay();
+			}
+			refresh = 0;
 		}
-		refresh = 0;
 	}
 	if(mode == 4 && timerRunning && timerValue < 6000) {
 		timerValue++;
@@ -492,30 +560,41 @@ void displayAnalogClock() {
 	FastLED.show();
 }
 
-void displayTemperature() {// TODO implement 7s display
+void displayTemperature() {
 	float temperature = dht.readTemperature(temperatureMode == 'F' ? true : false);
-	if (!isnan(temperature)) {
-		//Serial.println("[E] Failed to read from DHT sensor");
-	//} else {
+	/*if (isnan(temperature)) {
+		Serial.println("[E] Failed to read from DHT sensor");
+	} else {
 		// DEBUG
-		/*Serial.print("[D] Temperature: ");
+		Serial.print("[D] Temperature: ");
 		Serial.print(temperature);
 		Serial.print("°");
-		Serial.println(temperatureMode);*/
-		// TODO: display temp on 7s led module
+		Serial.println(temperatureMode);
+	}*/
+	if (!isnan(temperature)) {
+		mux(temperature, false);
+		uint8_t data[] = {muxReturn[0], muxReturn[1], extras[0], extras[(temperatureMode == 'F' ? 3 : 1)]};
+		display.clear();
+		display.setSegments(data);
 	}
 }
 
 void displayHumidity() {// TODO implement 7s display
 	float humidity = dht.readHumidity();
-	if (!isnan(humidity)) {
-		//Serial.println("Failed to read from DHT sensor!");
-	//} else {
+	/*if (isnan(humidity)) {
+		Serial.println("Failed to read from DHT sensor!");
+	} else {
 		// DEBUG
-		/*Serial.print("[D] Humidity: ");
+		Serial.print("[D] Humidity: ");
 		Serial.print(humidity);
-		Serial.println("%");*/
-		// TODO: display hum on 7s led module
+		Serial.println("%");
+		TODO: display hum on 7s led module
+	}*/
+	if (!isnan(humidity)) {
+		mux(humidity, false);
+		uint8_t data[] = {muxReturn[0], muxReturn[1], extras[0], extras[2]};
+		display.clear();
+		display.setSegments(data);
 	}
 }
 
@@ -527,10 +606,21 @@ void displayScoreboard() {// TODO implement 7s display
 		LEDs[i].nscale8_video(brightnessOffset0);
 	}
 	FastLED.show();
-	// DEBUG
-	//Serial.print("[D] Score Left: ");
-	//Serial.println(scoreLeft);
-	//Serial.print("[D] Score Right: ");
-	//Serial.println(scoreRight);
-	// TODO: display score on 7s led module
+	uint8_t data[4];
+	if (scoreLeft < 10) {
+		data[0] = numbersWithoutDot[0];
+		data[1] = numbersWithDot[scoreLeft];
+	} else {
+		data[0] = numbersWithoutDot[(int)(scoreLeft / 10)];
+		data[1] = numbersWithDot[scoreLeft % 10];
+	}
+	if (scoreRight < 10) {
+		data[2] = numbersWithoutDot[0];
+		data[3] = numbersWithoutDot[scoreRight];
+	} else {
+		data[2] = numbersWithoutDot[(int)(scoreRight / 10)];
+		data[3] = numbersWithoutDot[scoreRight % 10];
+	}
+	display.clear();
+	display.setSegments(data);
 }
