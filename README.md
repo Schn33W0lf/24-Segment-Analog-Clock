@@ -10,8 +10,7 @@ To control the clock you can use a bluetooth terminal of your choice or my [app]
 
 ## App
 
-Feel free to modify my app like you want to (for non-commercial purposes!).<br>
-[Source code](app-data/analog-clock-v1-build2.zip)
+Feel free to modify my app like you want to. [Source code](app-data/analog-clock-v1-build2.zip)
 
 If the app asks you to enable bluetooth, the devices wont display after you allowed it, first you need to reload the current site.<br>
 Press on the Devices button to reload the site (works on other sites too).
