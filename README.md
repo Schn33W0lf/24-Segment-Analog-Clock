@@ -6,11 +6,12 @@ __Note:__ Still work in progress, v0: display time, scoreboard (only red/ blue s
 This is the source and schema for a homemade analog clock I've made. The code is based on [this](https://github.com/leonvandenbeukel/3D-7-Segment-Digital-Clock/blob/master/3D-7-Segment-Digital-Clock.ino).
 
 In daylight it's not very bright.
-To control the clock you can use a bluetooth terminal of your choice or my [app](analog-clock-v1-build1-release.apk).<br>
+To control the clock you can use a bluetooth terminal of your choice or my [app](app-release/analog-clock-v1-build2-release.apk).<br>
 
 ## App
 
-Feel free to modify my app like you want to (for non-commercial purposes!).
+Feel free to modify my app like you want to (for non-commercial purposes!).<br>
+[Source code](app-data/analog-clock-v1-build2.zip)
 
 If the app asks you to enable bluetooth, the devices wont display after you allowed it, first you need to reload the current site.<br>
 Press on the Devices button to reload the site (works on other sites too).
