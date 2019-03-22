@@ -2,18 +2,18 @@
 
 ## Perfboard (untested):
 
-![perfboard](wiring/AnalogClockV1_perfboard.png)
+![perfboard](AnalogClockV1_perfboard.png)
 
 ## Wiring Diagram:
 
-![pcb](wiring/AnalogClockV1_wiring_diagram.png)
+![wiring diagram]AnalogClockV1_wiring_diagram.png)
 
 ## PCB (untested):
 
-![pcb](wiring/AnalogClockV1_pcb.png)
+![pcb](AnalogClockV1_pcb.png)
 
 ## [Fritzing File](wiring/AnalogClockV1.fzz)
 
 ## Breadboard:
 
-![pcb](wiring/AnalogClockV1_breadboard.png)
+![breadboard](AnalogClockV1_breadboard.png)
