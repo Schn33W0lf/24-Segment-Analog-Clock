@@ -39,7 +39,7 @@ The values will be stored in most cases to `/storage/emulated/0/AnalogClockV1/co
 | Temperature & Humidity Sensor: DHT11 or DHT22 | 1x Generic female header - 3 pins    | Library: [Timer](https://github.com/JChristensen/Timer)                 |
 | LED 4 Digits 7 Segment Display: TM1637        |                                        | Library: [TM1637](https://github.com/avishorp/TM1637)                   |
 | 5V / 2A  Power Supply                  			    |                                        |                                                                         |
-| PCB                                        	  |                                        |                                                                         |
+| PCB, Breadboard, ...                          |                                        |                                                                         |
 | Wires, Glue and a lot of patience :)       	  |                                        |                                                                         |
 
 ## Commands
