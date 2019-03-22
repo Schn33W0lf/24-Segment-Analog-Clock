@@ -31,7 +31,7 @@ The values will be stored in most cases to `/storage/emulated/0/AnalogClockV1/co
 
 | Hardware                              		      | Additional hardware for wireless clock | Software                                                                |
 | -------------                          	      | -------------                          | -------------                                                           |
-| Arduino Nano                           			    | Li-Ion 18650 Battery                   | Arduino IDE                                                             |
+| Arduino Nano (ATmega328!)              			    | Li-Ion 18650 Battery                   | Arduino IDE                                                             |
 | LED strip WS2812B 1m 30 RGB LEDs (24 needed)  | 5V 1A Step Up Power Module             | Library: [Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor) |
 | Real time clock: DS3231                       | A battery holder wouldn't be bad...    | Library: [DHT](https://github.com/adafruit/DHT-sensor-library)          |
 | (and a battery if not included)               | 2x Generic female header - 15 pins     | Library: [FastLED](https://github.com/FastLED/FastLED)                  |
