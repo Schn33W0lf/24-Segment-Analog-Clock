@@ -29,6 +29,8 @@ The values will be stored in most cases to `/storage/emulated/0/AnalogClockV1/co
 
 [![schema](wiring/AnalogClockV1_wiring_diagram.png)](wiring)
 
+See wiring folder for sketches
+
 | Hardware                              		      | Additional hardware for wireless clock | Software                                                                |
 | -------------                          	      | -------------                          | -------------                                                           |
 | Arduino Nano (ATmega328!)              			    | Li-Ion 18650 Battery                   | Arduino IDE                                                             |
@@ -85,5 +87,8 @@ Synthax:
 
 ## Pictures of building process
 
-[Clock displaying scoreboard](https://github.com/Schn33W0lf/24-Segment-Analog-Clock/raw/master/clock_dev_scoreboard.png)<br>
-[Clock displaying 18:55](https://github.com/Schn33W0lf/24-Segment-Analog-Clock/raw/master/clock_dev_time.png)
+[Clock displaying humidity](https://github.com/Schn33W0lf/24-Segment-Analog-Clock/raw/master/dev/AnalogClock_dev_humidity.PNG)<br>
+[Clock displaying scoreboard](https://github.com/Schn33W0lf/24-Segment-Analog-Clock/raw/master/dev/AnalogClock_dev_scoreboard.PNG)<br>
+[Clock displaying temperature](https://github.com/Schn33W0lf/24-Segment-Analog-Clock/raw/master/dev/AnalogClock_dev_temperature.PNG)<br>
+[Clock displaying 18:55](https://github.com/Schn33W0lf/24-Segment-Analog-Clock/raw/master/dev/AnalogClock_dev_time.PNG)
+
