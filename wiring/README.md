@@ -16,4 +16,4 @@
 
 ## Breadboard:
 
-![breadboard](AnalogClockV1_breadboard.png)
+![breadboard](AnalogClockV0_breadboard.png)
