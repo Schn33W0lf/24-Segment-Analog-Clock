@@ -14,6 +14,6 @@
 
 ## [Fritzing File](wiring/AnalogClockV1.fzz)
 
-## Breadboard **(OLD!)**:
+## Breadboard (OLD!):
 
 ![breadboard](AnalogClockV0_breadboard.png)
