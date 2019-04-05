@@ -1,7 +1,7 @@
 /*
  * MIT License
  * 
- * Copyright (c) 2019 Schn33W0lf
+ * Copyright (c) 2018 Leon van den Beukel, 2019 Schn33W0lf
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -35,12 +35,6 @@
  */
 
 /*
- * TODO: Implement 7s display in some functions for
- * - date
- * - temperature
- * - humidity
- * - scoreboard
- * - timer
  * TODO: Timer: show milliseconds with cricles?
  *
  * INFO: Because of performance problems, I commented most [D]ebug messages out.
@@ -139,8 +133,8 @@ volatile int scoreRight;
 // Setup for Clock
 short muxReturn[2];
 
-volatile short mode = 0;
-volatile bool modeToggle = true;
+volatile short mode = 1;
+volatile bool modeToggle = false;
 const int toggleInterval = 5;
 
 char temperatureMode = 'C';
@@ -435,7 +429,7 @@ void refreshDisplay() {
 	}
 }
 
-void refreshTimer() {// TODO implement 7s display
+void refreshTimer() {
 	if (modeToggle) {
 		refresh++;
 		if(refresh >= toggleInterval) {
@@ -453,24 +447,31 @@ void refreshTimer() {// TODO implement 7s display
 		timerValue++;
 		int m = timerValue / 60;
 		int s = timerValue % 60;
-		// DEBUG
-		/*Serial.print("[D] Timer: ");
-		Serial.print(m);
-		Serial.print(":");
-		Serial.println(s);*/
-		// TODO: display timer on 7s led module
+		uint8_t data[4];
+		if (m < 10) {
+			data[0] = numbersWithoutDot[0];
+			data[1] = numbersWithDot[m];
+		} else {
+			data[0] = numbersWithoutDot[(int)(m / 10)];
+			data[1] = numbersWithDot[m % 10];
+		}
+		if (s < 10) {
+			data[2] = numbersWithoutDot[0];
+			data[3] = numbersWithoutDot[s];
+		} else {
+			data[2] = numbersWithoutDot[(int)(s / 10)];
+			data[3] = numbersWithoutDot[s % 10];
+		}
+		display.clear();
+		display.setSegments(data);
 	}
 }
 
 void displayAnalogClock() {
+	display.clear();
 	DateTime now = rtc.now();
 	int hours = now.hour();
 	int mins = now.minute();
-	// [D]
-	/*Serial.print("[D] Time: ");
-	Serial.print(hours);
-	Serial.print(":");
-	Serial.println(mins);*/
 	/// Convert 24h to 12h to led id
 	hours %= 12;
 	hours += 12; // use 2nd circle
@@ -562,15 +563,6 @@ void displayAnalogClock() {
 
 void displayTemperature() {
 	float temperature = dht.readTemperature(temperatureMode == 'F' ? true : false);
-	/*if (isnan(temperature)) {
-		Serial.println("[E] Failed to read from DHT sensor");
-	} else {
-		// DEBUG
-		Serial.print("[D] Temperature: ");
-		Serial.print(temperature);
-		Serial.print("°");
-		Serial.println(temperatureMode);
-	}*/
 	if (!isnan(temperature)) {
 		mux(temperature, false);
 		uint8_t data[] = {muxReturn[0], muxReturn[1], extras[0], extras[(temperatureMode == 'F' ? 3 : 1)]};
@@ -579,17 +571,8 @@ void displayTemperature() {
 	}
 }
 
-void displayHumidity() {// TODO implement 7s display
+void displayHumidity() {
 	float humidity = dht.readHumidity();
-	/*if (isnan(humidity)) {
-		Serial.println("Failed to read from DHT sensor!");
-	} else {
-		// DEBUG
-		Serial.print("[D] Humidity: ");
-		Serial.print(humidity);
-		Serial.println("%");
-		TODO: display hum on 7s led module
-	}*/
 	if (!isnan(humidity)) {
 		mux(humidity, false);
 		uint8_t data[] = {muxReturn[0], muxReturn[1], extras[0], extras[2]};
@@ -598,7 +581,7 @@ void displayHumidity() {// TODO implement 7s display
 	}
 }
 
-void displayScoreboard() {// TODO implement 7s display
+void displayScoreboard() {
 	fill_solid(&(LEDs[0]), NUM_LEDS, CRGB::Black);
 	fill_solid(&(LEDs[1]), 5, colorPrimary);
 	fill_solid(&(LEDs[7]), 5, colorSecondary);
