@@ -1,18 +1,23 @@
 # Hardware
 
-## Perfboard (DEV: Tested, R1.1 need to be a pull up resistor):
+
+## Perfboard (Tested, R1.1 need to be a pull up resistor):
 
 ![perfboard](AnalogClockV1_perfboard.png)
 
-## Wiring Diagram (DEV: see perfboard):
+
+## Wiring Diagram (Tested with perf-/breadboard, R1.1 need to be a pull up resistor):
 
 ![wiring diagram](AnalogClockV1_wiring_diagram.png)
 
-## PCB (DEV: untested, see perfboard):
+
+## PCB (untested, R1.1 need to be a pull up resistor):
 
 ![pcb](AnalogClockV1_pcb.png)
 
-## [Fritzing File](wiring/AnalogClockV1.fzz)
+
+## [Fritzing File](wiring/AnalogClockV1.fzz) (pics above are from here)
+
 
 ## Breadboard (DEV: OLD!, R1.1 is ok):
 
