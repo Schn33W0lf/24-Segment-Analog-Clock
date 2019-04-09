@@ -27,9 +27,9 @@ The values will be stored in most cases to `/storage/emulated/0/AnalogClockV1/co
 
 ## Hardware
 
-___The resistor R1.1 need to be a pull UP resistor!
+___The resistor R1.1 need to be a pull UP resistor!___
 
-(By the way, the cirquit worked with even no resistors...)___
+_(Btw, the cirquit worked with even no resistors...)_
 
 [![schema](wiring/AnalogClockV1_wiring_diagram.png)](wiring)
 
