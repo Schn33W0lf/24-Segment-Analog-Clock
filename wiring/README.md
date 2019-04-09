@@ -3,6 +3,7 @@
 
 ## Perfboard (Tested, R1.1 need to be a pull up resistor):
 
+_To solder the back side, mirror the image_
 ![perfboard](AnalogClockV1_perfboard.png)
 
 
