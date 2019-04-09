@@ -6,7 +6,7 @@
 
 ## Wiring Diagram (DEV: see perfboard):
 
-![wiring diagram]AnalogClockV1_wiring_diagram.png)
+![wiring diagram](AnalogClockV1_wiring_diagram.png)
 
 ## PCB (DEV: untested, see perfboard):
 
